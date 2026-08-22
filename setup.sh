@@ -29,7 +29,7 @@ yay -S --needed --noconfirm --answerdiff=None --answerclean=None \
   power-profiles-daemon zram-generator sddm sddm-conf \
   noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono-nerd \
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber gst-plugin-pipewire \
-  amd-ucode nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-prime egl-wayland \
+  linux-headers amd-ucode nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-prime egl-wayland \
   mesa lib32-mesa vulkan-icd-loader lib32-vulkan-icd-loader vulkan-radeon lib32-vulkan-radeon \
   steam discord vencord-installer-bin onlyoffice-bin \
   qemu-full libvirt virt-manager edk2-ovmf dnsmasq swtpm dmidecode \
