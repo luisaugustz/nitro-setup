@@ -26,7 +26,7 @@ yay -S --needed --noconfirm --answerdiff=None --answerclean=None \
   qt5-wayland qt6-wayland polkit-kde-agent foot firefox thunar gvfs \
   grim slurp wl-clipboard cliphist wtype brightnessctl playerctl pavucontrol \
   networkmanager network-manager-applet bluez bluez-utils blueman \
-  power-profiles-daemon zram-generator sddm sddm-conf \
+  power-profiles-daemon zram-generator sddm \
   noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-jetbrains-mono-nerd \
   pipewire pipewire-pulse pipewire-alsa pipewire-jack wireplumber gst-plugin-pipewire \
   linux-headers amd-ucode nvidia-open-dkms nvidia-utils lib32-nvidia-utils nvidia-prime egl-wayland \
@@ -35,8 +35,12 @@ yay -S --needed --noconfirm --answerdiff=None --answerclean=None \
   qemu-full libvirt virt-manager edk2-ovmf dnsmasq swtpm dmidecode \
   caelestia-shell caelestia-cli hyprmod
 
-echo ">> [3/6] NVIDIA: modeset + módulos no initramfs"
-echo 'options nvidia_drm modeset=1' | sudo tee /etc/modprobe.d/nvidia.conf >/dev/null
+echo ">> [3/6] NVIDIA: modeset + suspend + módulos no initramfs"
+# modeset=1 (Wayland) e PreserveVideoMemoryAllocations=1 (suspend/resume sem tela preta)
+sudo tee /etc/modprobe.d/nvidia.conf >/dev/null <<'EOF'
+options nvidia_drm modeset=1
+options nvidia NVreg_PreserveVideoMemoryAllocations=1
+EOF
 if ! grep -q 'nvidia_drm' /etc/mkinitcpio.conf; then
   sudo sed -i 's/^MODULES=(/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm /' /etc/mkinitcpio.conf
 fi
